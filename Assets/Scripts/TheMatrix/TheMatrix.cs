@@ -74,11 +74,6 @@ namespace GameSystem
                     //StartCoroutine(_Start());
                     //yield break;
                 }
-                if (GetGameMessage(GameMessage.Exit))
-                {
-                    Application.Quit();
-                    yield break;
-                }
             }
 
             //不直接用嵌套，防止嵌套层数过深（是否有自动优化？没查到）
@@ -88,12 +83,13 @@ namespace GameSystem
         // 游戏开始
         private IEnumerator _Start()
         {
+            SceneSystem.LoadScene(Setting.gameSceneMap[GameScene.startMenu]);
+
             onGameStart?.Invoke();
             yield return 0;
         }
 
         #endregion
-
 
 
 
@@ -202,8 +198,6 @@ namespace GameSystem
 
 
         //存档控制----------------------------
-
-
         private static void SaveTemporary(SavableObject data)
         {
             //此方法将数据保存到内存，但不保存到磁盘

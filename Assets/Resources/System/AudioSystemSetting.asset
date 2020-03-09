@@ -21,3 +21,6 @@ MonoBehaviour:
   soundClips:
     list:
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

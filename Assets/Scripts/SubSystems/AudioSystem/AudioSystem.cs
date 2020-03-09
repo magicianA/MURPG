@@ -44,7 +44,10 @@ namespace GameSystem
         /// </summary>
         public enum Sound
         {
-            soundA
+            soundA,
+            SoundB,
+            s,
+            c
         }
 
         /// <summary>
