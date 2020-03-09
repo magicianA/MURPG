@@ -27,18 +27,62 @@ namespace GameSystem
         /// </summary>
         public static event System.Action onGameStart;
 
-        //流程--------------------------------
         public enum GameScene
         {
-            awakeScene,
+            logo,
+            startMenu,
             startScene
         }
-        
 
+
+        #region 【游戏流程】
+        //游戏流程----------------------------
         private IEnumerator _Awake()
         {
             onGameAwake?.Invoke();
             yield return 0;
+
+            StartCoroutine(_CheckExit());
+            StartCoroutine(_Logo());
+        }
+
+        private IEnumerator _CheckExit()
+        {
+            while (true)
+            {
+                yield return 0;
+                if (GetGameMessage(GameMessage.Exit))
+                {
+                    Application.Quit();
+                }
+            }
+        }
+
+        private IEnumerator _Logo()
+        {
+            SceneSystem.LoadScene(Setting.gameSceneMap[GameScene.logo]);
+
+            //在进入每个状态前重置控制信息
+            ResetGameMessage();
+            while (true)
+            {
+                //提前return，延迟一帧开始检测
+                yield return 0;
+                if (GetGameMessage(GameMessage.Next))
+                {
+                    break;
+                    //StartCoroutine(_Start());
+                    //yield break;
+                }
+                if (GetGameMessage(GameMessage.Exit))
+                {
+                    Application.Quit();
+                    yield break;
+                }
+            }
+
+            //不直接用嵌套，防止嵌套层数过深（是否有自动优化？没查到）
+            StartCoroutine(_Start());
         }
 
         // 游戏开始
@@ -48,188 +92,7 @@ namespace GameSystem
             yield return 0;
         }
 
-        ////第一个场景
-        //public string _startScene;
-        //private IEnumerator _StartScene()
-        //{
-        //    SceneManager.LoadScene(_startScene);
-
-        //    onGameInitialize?.Invoke();
-
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Next)) break;
-        //        if (GetGameMessage(GameMessage.Exit))
-        //        {
-        //            Application.Quit();
-        //        }
-        //    }
-
-        //    StartCoroutine(_InGame());
-        //}
-
-        //public string _inGame;
-        //private IEnumerator _InGame()
-        //{
-        //    SceneManager.LoadScene(_inGame);
-        //    EnemySystem.StartEnemyActionCoroutine();
-        //    //监测游戏状态
-        //    StartCoroutine(EnemySystem.GameOverCheck());
-
-        //    GetComponent<AudioSource>().Play();
-
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.GameOver))
-        //        {
-        //            StartCoroutine(_GameOver());
-        //            yield break;
-        //        }
-        //        if (GetGameMessage(GameMessage.GameWin))
-        //        {
-        //            StartCoroutine(_GameWin());
-        //            yield break;
-        //        }
-        //        if (GetGameMessage(GameMessage.Exit))
-        //        {
-        //            Application.Quit();
-        //        }
-        //    }
-        //}
-        ////游戏结束
-        //public string _gameOver;
-        //private IEnumerator _GameOver()
-        //{
-        //    EnemySystem.StopEnemyActionCoroutine();
-        //    yield return 0;
-        //    SceneManager.LoadScene(_gameOver);
-
-        //    GetComponent<AudioSource>().Stop();
-
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Next)) break;
-        //    }
-
-        //    StartCoroutine(_StartScene());
-        //}
-        ////游戏胜利
-        //public string _gameWin;
-        //private IEnumerator _GameWin()
-        //{
-        //    SceneManager.LoadScene(_gameWin);
-        //    GetComponent<AudioSource>().Stop();
-        //    EnemySystem.StopEnemyActionCoroutine();
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Next)) break;
-        //    }
-        //    StartCoroutine(_StartScene());
-        //}
-
-        ////场景名字记为_name
-        //public string _logo;
-        ///// <summary>
-        ///// 开始的Logo场景
-        ///// </summary>
-        //private IEnumerator _Logo()
-        //{
-        //    SceneSystem.PushScene(_logo);
-        //    //在进入每个状态前重置控制信息
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        //提前return，延迟一帧开始检测
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Skip))
-        //        {
-        //            //不直接用嵌套，防止嵌套层数过深（是否有自动优化？没查到）
-        //            StartCoroutine(_StartMenu());
-        //            //结束
-        //            yield break;
-        //        }
-        //    }
-        //}
-
-        //public string _startMenu;
-        //private IEnumerator _StartMenu()
-        //{
-        //    yield return new WaitForSeconds(SceneSystem.PopAndPushScene(_startMenu));
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Start))
-        //        {
-        //            StartCoroutine(_Lobby());
-        //            yield break;
-        //        }
-        //        if (GetGameMessage(GameMessage.Exit))
-        //        {
-        //            Application.Quit();
-        //            yield break;
-        //        }
-        //    }
-        //}
-
-        //public string _lobby;
-        //private IEnumerator _Lobby()
-        //{
-        //    yield return new WaitForSeconds(SceneSystem.PopAndPushScene(_lobby));
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Start))
-        //        {
-        //            StartCoroutine(_InGame());
-        //            yield break;
-        //        }
-        //        if (GetGameMessage(GameMessage.Return))
-        //        {
-        //            StartCoroutine(_StartMenu());
-        //            yield break;
-        //        }
-        //    }
-
-        //}
-
-        //public string _inGame;
-        //private IEnumerator _InGame()
-        //{
-        //    yield return new WaitForSeconds(SceneSystem.PopAndPushScene(_inGame));
-        //    ResetGameMessage();
-        //    while (true)
-        //    {
-        //        yield return 0;
-        //        if (GetGameMessage(GameMessage.Return))
-        //        {
-        //            StartCoroutine(_StartMenu());
-        //            yield break;
-        //        }
-        //        if (GetGameMessage(GameMessage.Exit))
-        //        {
-        //            Application.Quit();
-        //            yield break;
-        //        }
-        //    }
-        //}
-
-
-
-
-
-
-
-
+        #endregion
 
 
 

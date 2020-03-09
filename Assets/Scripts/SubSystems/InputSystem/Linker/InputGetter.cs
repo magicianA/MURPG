@@ -10,11 +10,12 @@ namespace GameSystem
         public class InputGetter : MonoBehaviour
         {
             public InputSystem.InputKey key;
+            public bool anyKey;
 
             private void Update()
             {
-                if (InputSystem.GetKey(key)) keyOutput?.Invoke();
-                if (InputSystem.GetKeyDown(key)) keyDownOutput?.Invoke();
+                if (anyKey ? Input.anyKey : InputSystem.GetKey(key)) keyOutput?.Invoke();
+                if (anyKey ? Input.anyKeyDown : InputSystem.GetKeyDown(key)) keyDownOutput?.Invoke();
                 if (InputSystem.GetKeyUp(key)) keyUpOutput?.Invoke();
             }
 
