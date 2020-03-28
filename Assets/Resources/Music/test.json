@@ -1,0 +1,41 @@
+{
+    "bpm" : "12",
+    "notecount" : "5",
+    "notes" : [
+        {
+            "id" : "1",
+            "pos" : "0.1",
+            "time" : "0",
+            "size" : "1.0",
+            "type" : "Click"
+        },
+        {
+            "id" : "2",
+            "pos" : "-0.2",
+            "time" : "2",
+            "size" : "1.0",
+            "type" : "Click"
+        },
+        {
+            "id" : "3",
+            "pos" : "0.6",
+            "time" : "3",
+            "size" : "0.6",
+            "type" : "Click"
+        },
+        {
+            "id" : "4",
+            "pos" : "0.1",
+            "time" : "4",
+            "size" : "1.0",
+            "type" : "Click"
+        },
+        {
+            "id" : "5",
+            "pos" : "0",
+            "time" : "200",
+            "size" : "1.0",
+            "type" : "Click"
+        }
+    ]
+}
