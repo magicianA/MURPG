@@ -5,6 +5,8 @@ using UnityEngine;
 public class line : MonoBehaviour
 {
     public float notespeed = 70f;
+    public GameObject player;
+    public bool onplayermove = false;
     
     #region HOLDNOTE
     private float[] holdtime = new float[10];
@@ -35,8 +37,8 @@ public class line : MonoBehaviour
     }
     void Update()
     {   
-        Touch[] touches = Input.touches;
-        for(int i = 0;i < 1/*Input.touchCount*/;i++){
+        //Touch[] touches = Input.touches;
+        for(int i = 0;i < 1;i++){
             if(Input.GetMouseButtonDown(0)){
             //if(touches[i].phase == TouchPhase.Began){
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -45,35 +47,59 @@ public class line : MonoBehaviour
                     obj = hit.collider.gameObject;
                     hitpoint = hit.point;
                     if(obj.name == "Line"){
-                        ray = new Ray(hitpoint,Vector3.forward);
-                        if(Physics.Raycast(ray,out hit)){
-                            hitpoint = hit.point;
-                            obj = hit.collider.gameObject;
-                            if(hit.transform.tag == "ClickNote"){
-                                NoteResultType res  = CheckClickResult(hitpoint.z);
-                                Debug.Log(res);
-                                if(res != NoteResultType.Unknown)
-                                    Destroy(hit.collider.gameObject);
-                            }
-                            if(hit.transform.tag == "HoldNote"){
-                                onhold[0] = true;
-                                holdtime[0] = obj.GetComponent<HoldNoteAct>().endtime;
-                                holdnotes[0] = obj;
-                                NoteResultType res  = CheckClickResult(hitpoint.z);
-                            }
-                            if(hit.transform.tag == "FlickNote"){
-                                flickres = CheckClickResult(hitpoint.z);
-                                if(fingerTouchState == FINGER_STATE_NULL){
-                                    fingerTouchState = FINGER_STATE_TOUCH;
-                                    fingerBeginX = Input.mousePosition.x;
-                                    fingerBeginY = Input.mousePosition.y;
-                                }
+                        onplayermove = true;
+                        player.transform.position = new Vector3(hitpoint.x,player.transform.position.y,player.transform.position.z);
+                    }
+                }
+                else{
+                    onplayermove = false;
+                    ray = new Ray(player.transform.position,Vector3.forward);
+                    if(Physics.Raycast(ray,out hit)){
+                        hitpoint = hit.point;
+                        obj = hit.collider.gameObject;
+                        if(hit.transform.tag == "ClickNote"){
+                            NoteResultType res  = CheckClickResult(hitpoint.z);
+                            Debug.Log(res);
+                            if(res != NoteResultType.Unknown)
+                                Destroy(hit.collider.gameObject);
+                        }
+                        if(hit.transform.tag == "HoldNote"){
+                            onhold[0] = true;
+                            holdtime[0] = obj.GetComponent<HoldNoteAct>().endtime;
+                            holdnotes[0] = obj;
+                            NoteResultType res  = CheckClickResult(hitpoint.z);
+                        }
+                        if(hit.transform.tag == "FlickNote"){
+                            flickres = CheckClickResult(hitpoint.z);
+                            //Debug.Log(flickres);
+                            if(fingerTouchState == FINGER_STATE_NULL){
+                                fingerTouchState = FINGER_STATE_TOUCH;
+                                fingerBeginX = Input.mousePosition.x;
+                                fingerBeginY = Input.mousePosition.y;
                             }
                         }
                     }
                 }
-            }
+            }        
             if(Input.GetMouseButton(0)){
+                if(onplayermove){
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if(Physics.Raycast(ray, out hit)){
+                        //Debug.Log(hit.collider.gameObject.name);
+                        obj = hit.collider.gameObject;
+                        hitpoint = hit.point;
+                        if(obj.name == "Line"){
+                            onplayermove = true;
+                            player.transform.position = new Vector3(hitpoint.x,player.transform.position.y,player.transform.position.z);
+                        }
+                        else{
+                            onplayermove = false;
+                        }
+                    }
+                    else{
+                        onplayermove = false;
+                    }
+                }
                 if(onhold[0] && holdtime[0]>= 0){
                     holdtime[0] -= Time.deltaTime;
                 }
@@ -106,7 +132,7 @@ public class line : MonoBehaviour
                             }
                             else{
                                 Debug.Log("left");
-                        }
+                            }
                         }
                     }
                 }

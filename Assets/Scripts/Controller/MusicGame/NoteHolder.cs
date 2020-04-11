@@ -11,7 +11,7 @@ public class NoteHolder : MonoBehaviour
     public List<Note> notes = new List<Note>();
     private Queue<Note> pendingnotes = new Queue<Note>();
     public float bpm;
-    public GameObject clicknoteprefab,holdnoteprefab;
+    public GameObject clicknoteprefab,holdnoteprefab,flicknoteprefab;
     public int notecount;
     void Start()
     {
@@ -31,6 +31,9 @@ public class NoteHolder : MonoBehaviour
                     break;
                 case NoteStyleType.Hold:
                     t._gameobject = t.ToInstance(holdnoteprefab,new Vector3(20 * t.pos,0,400f),gameObject);
+                    break;
+                case NoteStyleType.Flick:
+                    t._gameobject = t.ToInstance(flicknoteprefab,new Vector3(20 * t.pos,0,400f),gameObject);
                     break;
             }
             pendingnotes.Dequeue();
