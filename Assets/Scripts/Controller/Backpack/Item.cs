@@ -7,6 +7,7 @@ public abstract class Item : ScriptableObject
 {
     private GameObject canvas = GameObject.FindWithTag("Canvas");
     public Sprite logo;
+    public string name;
     public string description;
     public GameObject descriptionLabel = (GameObject)Resources.Load("Daily/DescriptionLabel");
     public abstract void Func();

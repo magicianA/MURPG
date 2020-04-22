@@ -5,23 +5,8 @@ using UnityEngine.UI;
 
 public class Backpack : MonoBehaviour
 {
-
-    static Backpack instance;
-
-    public static Backpack Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new Backpack();
-            }
-            return instance;
-        }
-    }
-
     //private List<Item> itemList;
-    private Dictionary<Item, GameObject> itemsGameObjects = new Dictionary<Item, GameObject>();
+    public Dictionary<string, GameObject> itemsGameObjects = new Dictionary<string, GameObject>();
     private GameObject itemPrefab;
     public bool[] solt = new bool[35];
     public Vector3[] soltPos = new Vector3[35];
@@ -29,19 +14,23 @@ public class Backpack : MonoBehaviour
     {
         Init();
     }
+    private void Update()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Slot");
+        for (int i = 0; i < solt.Length; i++)
+        {
+            soltPos[i] = gameObjects[i].transform.position;
+        }
+    }
     private void Init()
     {
         for (int i = 0; i < solt.Length; i++)
         {
             solt[i] = true;
         }
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Slot");
-        for(int i = 0; i < solt.Length; i++)
-        {
-            soltPos[i] = gameObjects[i].transform.position;
-        }
+
         itemsGameObjects.Clear();
-        itemPrefab = (GameObject)Resources.Load("Daily/item");
+        itemPrefab = (GameObject)Resources.Load("Daily/Item");
     }
     private void Show()
     {
@@ -49,7 +38,8 @@ public class Backpack : MonoBehaviour
     }
     public void AddItem(Item item)
     {
-        itemsGameObjects.Add(item, CreateItem(item));
+        itemsGameObjects.Add(item.name, CreateItem(item));
+        Debug.Log("成功");
     }
     
 
@@ -67,7 +57,7 @@ public class Backpack : MonoBehaviour
         }
         gameObj.transform.position = soltPos[index];
         solt[index] = false;
-        gameObj.GetComponent<Button>().onClick.AddListener(item.OnClick);
+        //gameObj.GetComponent<Button>().onClick.AddListener(item.OnClick);
         return gameObj;
     }
     private int ReturnTrueIndex()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDragHandler
 {
@@ -51,10 +52,23 @@ public class DragUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDrag
         }
         else
             transform.position = originPos;
+
     }
     public float GetFlatDis(Vector3 v1,Vector3 v2)
     {
         
         return Mathf.Pow(v1.x - v2.x,2) + Mathf.Pow(v1.y - v2.y,2);
     }
+    //private bool OutOfRange()
+    //{
+    //    if (backpack.gameObject.GetComponent<Mask>().IsActive() == false)
+    //    {
+
+    //    }
+    //    else
+    //    {
+
+    //    }
+
+    //}
 }

@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class InteractiveItem : Item
 {
-    public InteractiveItem(string path,string description)
+    public InteractiveItem(string path,string name,string description)
     {
         logo = LoadSprite(path);
         this.description = description;
+        this.name = name;
     }
     public override void Func()
     {

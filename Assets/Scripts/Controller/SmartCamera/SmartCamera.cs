@@ -73,7 +73,7 @@ public class SmartCamera : MonoBehaviour
             targetZ += cameraPoints[i].distance * factor;
             targetFov += cameraPoints[i].fov * factor;
         }
-        Vector3 target3D = new Vector3(target2D.x, target2D.y, targetZ);
+        Vector3 target3D = new Vector3(target2D.x, target2D.y,-10f);
 
         float t = 1.0f - Mathf.Pow(1.0f - movingRate, Time.deltaTime / Time.timeScale);
         transform.position = Vector3.Lerp(transform.position, target3D, t);
