@@ -17,6 +17,7 @@ public class Right : MonoBehaviour
         if (MyInput.isButtonDown&&!backpack.itemsGameObjects.ContainsKey("knife"))
         {
             backpack.AddItem(knife);
+            UIManager.TextTip("获得刀");
         }
     }
 }

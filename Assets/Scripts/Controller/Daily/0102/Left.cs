@@ -17,6 +17,7 @@ public class Left : MonoBehaviour
         if (MyInput.isButtonDown && !backpack.itemsGameObjects.ContainsKey("ma"))
         {
             backpack.AddItem(ma);
+            UIManager.TextTip("获得玛");
         }
     }
 }
