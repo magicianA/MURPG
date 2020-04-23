@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - FlickNote
+  - Slot
+  - ClickNote
+  - HoldNote
   - Slot
   - Backpack
   - Canvas

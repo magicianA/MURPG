@@ -29,6 +29,11 @@ public class line : MonoBehaviour
     private RaycastHit hit;
     private GameObject obj;
     private Vector3 hitpoint;    
+
+
+    public GameObject noteeffectcontroller;
+
+
     void Start()
     {
         Input.multiTouchEnabled = true;
@@ -60,8 +65,10 @@ public class line : MonoBehaviour
                         if(hit.transform.tag == "ClickNote"){
                             NoteResultType res  = CheckClickResult(hitpoint.z);
                             Debug.Log(res);
-                            if(res != NoteResultType.Unknown)
-                                Destroy(hit.collider.gameObject);
+                            if(res != NoteResultType.Unknown){
+                                Destroy(hit.collider.gameObject);    
+                                noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
+                            }
                         }
                         if(hit.transform.tag == "HoldNote"){
                             onhold[0] = true;
