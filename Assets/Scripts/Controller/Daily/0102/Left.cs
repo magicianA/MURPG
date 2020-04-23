@@ -9,7 +9,7 @@ public class Left : MonoBehaviour
     private void Start()
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
-        ma = new InteractiveItem("Daily/主寺外/ma","ma", "玛");
+        ma = new InteractiveItem("Daily/Outside/ma","ma", "玛");
 
     }
     private void OnTriggerStay2D(Collider2D collision)
