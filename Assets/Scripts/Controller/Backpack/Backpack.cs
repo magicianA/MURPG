@@ -8,29 +8,42 @@ public class Backpack : MonoBehaviour
     //private List<Item> itemList;
     public Dictionary<string, GameObject> itemsGameObjects = new Dictionary<string, GameObject>();
     private GameObject itemPrefab;
-    public bool[] solt = new bool[35];
-    public Vector3[] soltPos = new Vector3[35];
+    public Dictionary<GameObject, bool> soltable = new Dictionary<GameObject, bool>();
+    public List<GameObject> solt;
     private void Awake()
     {
+        solt.Clear();
+        soltable.Clear();
+        itemsGameObjects.Clear();
+        itemPrefab = (GameObject)Resources.Load("Daily/Item");
         Init();
     }
     private void Update()
     {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Slot");
-        for (int i = 0; i < solt.Length; i++)
-        {
-            soltPos[i] = gameObjects[i].transform.position;
-        }
+        
     }
     private void Init()
     {
-        for (int i = 0; i < solt.Length; i++)
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Slot");
+        for (int i = 0; i < gameObjects.Length; i++)
         {
-            solt[i] = true;
+            solt.Add(gameObjects[i]);
+            soltable.Add(gameObjects[i], true);
         }
-
-        itemsGameObjects.Clear();
-        itemPrefab = (GameObject)Resources.Load("Daily/Item");
+    }
+    public void AddSolt(GameObject newSolt,bool able)
+    {
+        solt.Add(newSolt);
+        soltable.Add(newSolt, able);
+    }
+    public void RemoveSolt(GameObject newSolt)
+    {
+        solt.Remove(newSolt);
+        soltable.Remove(newSolt);
+    }
+    private void UpdateSolt()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Slot");
     }
     private void Show()
     {
@@ -55,16 +68,16 @@ public class Backpack : MonoBehaviour
             Debug.Log("背包已满");
             return null;
         }
-        gameObj.transform.position = soltPos[index];
-        solt[index] = false;
+        gameObj.transform.position = solt[index].transform.position;
+        soltable[solt[index]] = false;
         //gameObj.GetComponent<Button>().onClick.AddListener(item.OnClick);
         return gameObj;
     }
     private int ReturnTrueIndex()
     {
-        for(int i = 0; i < solt.Length; i++)
+        for(int i = 0; i < solt.Count; i++)
         {
-            if (solt[i] == true)
+            if (soltable[solt[i]] == true)
                 return i;
         }
 

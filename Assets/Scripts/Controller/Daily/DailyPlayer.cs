@@ -16,10 +16,11 @@ public class DailyPlayer : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
             Move(Vector2.right);
         else
-            Move(Vector2.zero);
+            Move(new Vector2(0,0.0001f));
     }
     private void Move(Vector2 target)
     {
         gameObject.GetComponent<Rigidbody2D>().velocity = target * speed ;
+
     }
 }

@@ -23,18 +23,18 @@ public class DragUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDrag
     public void OnPointerDown(PointerEventData eventData)
     {
         originPos = transform.position;
-        backpack.solt[GetNearPosIndex()] = true;
+        backpack.soltable[backpack.solt[GetNearPosIndex()]] = true;
     }
     private int GetNearPosIndex()
     {
         int index=0;
-        float distance = GetFlatDis(transform.position, backpack.soltPos[0]);
-        for(int i = 0; i < backpack.soltPos.Length; i++)
+        float distance = GetFlatDis(transform.position, backpack.solt[0].transform.position);
+        for(int i = 0; i < backpack.solt.Count; i++)
         {
-            Debug.Log(i + "  " + GetFlatDis(transform.position, backpack.soltPos[i]));
-            if (distance > GetFlatDis(transform.position, backpack.soltPos[i]))
+            
+            if (distance > GetFlatDis(transform.position, backpack.solt[i].transform.position))
             {
-                distance = GetFlatDis(transform.position, backpack.soltPos[i]);
+                distance = GetFlatDis(transform.position, backpack.solt[i].transform.position);
                 index = i;
             }
         }
@@ -45,10 +45,10 @@ public class DragUI : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         int index = GetNearPosIndex();
-        if (backpack.solt[index] == true)
+        if (backpack.soltable[backpack.solt[index]] == true)
         {
-            transform.position = backpack.soltPos[index];
-            backpack.solt[index] = false;
+            transform.position = backpack.solt[index].transform.position;
+            backpack.soltable[backpack.solt[index]] = false;
         }
         else
             transform.position = originPos;
