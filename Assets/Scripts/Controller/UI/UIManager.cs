@@ -14,14 +14,13 @@ public class UIManager : MonoBehaviour
         dialoguePrefab = (GameObject)Resources.Load("Daily/DialoguePanel");
         tipPrefab = (GameObject)Resources.Load("Daily/TipPrefab");
     }
-    public static void Dialogue(TextAsset file, Dictionary<string, Sprite> nameDictionary)
+    public static void Dialogue(TextAsset file)
     {
         GameObject panel = Instantiate(dialoguePrefab);
         panel.transform.SetParent(canvas.transform);
-        panel.transform.localScale = new Vector3(1, 1, 1);
-        panel.transform.localPosition = new Vector3(0, -250, 0);
+        panel.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        panel.transform.localPosition = new Vector3(0, -300, 0);
         panel.GetComponent<Dialogue>().file = file;
-        panel.GetComponent<Dialogue>().nameDictionary = nameDictionary;
 
     }
     public static void TextTips(TextAsset file)
