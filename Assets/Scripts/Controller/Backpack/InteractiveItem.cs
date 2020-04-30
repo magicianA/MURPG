@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class InteractiveItem : Item
 {
-    public InteractiveItem(string path,string name,string description)
+    public InteractiveItem(string path,string name)
     {
         logo = LoadSprite(path);
-        this.description = description;
         this.name = name;
     }
     public override void Func()

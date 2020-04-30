@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lock : MonoBehaviour
+public class Left : MonoBehaviour
 {
+    InteractiveItem ma;
     Backpack backpack;
+    public TextAsset text;
     private void Start()
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
+        ma = new InteractiveItem("Daily/道具/ma","玛");
+
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (MyInput.isButtonDown == true)
+        if (MyInput.isButtonDown && !backpack.itemsGameObjects.ContainsKey("ma"))
         {
-            if (backpack.itemsGameObjects.ContainsKey("ma"))
-                Destroy(gameObject);
-            else 
-                UIManager.TextTip("门已上锁");
+            UIManager.Dialogue(text);
+            backpack.AddItem(ma);
         }
     }
 }

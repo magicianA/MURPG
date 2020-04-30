@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Right : MonoBehaviour
+public class Lock : MonoBehaviour
 {
-    InteractiveItem knife;
     Backpack backpack;
+    public TextAsset text;
     private void Start()
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
-        knife = new InteractiveItem("Daily/Outside/knife","knife","刀");
-
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (MyInput.isButtonDown&&!backpack.itemsGameObjects.ContainsKey("knife"))
+        if (MyInput.isButtonDown == true)
         {
-            backpack.AddItem(knife);
-            UIManager.TextTip("获得刀");
+            if (backpack.itemsGameObjects.ContainsKey("ma"))
+                Destroy(gameObject);
+            else
+                UIManager.Dialogue(text);
         }
     }
 }

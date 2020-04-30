@@ -9,11 +9,15 @@ public class Tip : MonoBehaviour
     private void Start()
     {
         gameObject.GetComponentInChildren<Text>().text = str;
-
+        DailyPlayer.movable = false;
     }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
+        {
+            DailyPlayer.movable = true;
             Destroy(gameObject);
+        }
+
     }
 }
