@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Beam01_Music
-  m_Shader: {fileID: 4800000, guid: 6851fe0a292ce074ca0be49ec934f99d, type: 3}
+  m_Shader: {fileID: 4800000, guid: e984a407fe611bf42a0b37dcde9aca25, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -18,7 +18,6 @@ Material:
     MotionVector: User
   disabledShaderPasses:
   - MOTIONVECTORS
-  - ALWAYS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
