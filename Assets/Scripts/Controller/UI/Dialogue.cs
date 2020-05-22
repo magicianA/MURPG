@@ -36,6 +36,7 @@ public class Dialogue : MonoBehaviour
             else
             {
                 DailyPlayer.movable = true;
+                UIManager.isFinish = true;
                 Destroy(gameObject);
             }
         }

@@ -33,8 +33,11 @@ public class Backpack : MonoBehaviour
     }
     public void AddSolt(GameObject newSolt,bool able)
     {
-        solt.Add(newSolt);
-        soltable.Add(newSolt, able);
+        if (!solt.Contains(newSolt))
+        {
+            solt.Add(newSolt);
+            soltable.Add(newSolt, able);
+        }
     }
     public void RemoveSolt(GameObject newSolt)
     {
@@ -82,5 +85,23 @@ public class Backpack : MonoBehaviour
         }
 
         return -1;
+    }
+    public void ResetPosition(GameObject obj)
+    {
+        int index = ReturnTrueIndex();
+        if (index == -1)
+        {
+            Debug.Log("背包已满");
+            return;
+        }
+        obj.transform.position = solt[index].transform.position;
+        soltable[solt[index]] = false;
+    }
+    public bool ContainsItem(string name)
+    {
+        if (itemsGameObjects.ContainsKey(name))
+            return true;
+        else
+            return false;
     }
 }

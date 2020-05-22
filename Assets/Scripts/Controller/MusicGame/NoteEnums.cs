@@ -18,4 +18,5 @@ public enum NoteStyleType
     Hold,
     Drag,
     Flick,
+    Normal,
 }

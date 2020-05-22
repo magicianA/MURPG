@@ -19,7 +19,7 @@ public class Tree : MonoBehaviour
     }
     private void Update()
     {
-        if (GetFlatDis(backpack.itemsGameObjects["刀"].transform.position, slot.transform.position) < 0.01f)
+        if (backpack.itemsGameObjects.ContainsKey("刀")&&GetFlatDis(backpack.itemsGameObjects["刀"].transform.position, slot.transform.position) < 0.01f)
         {
             hang01.SetActive(false);
             hang02.SetActive(true);

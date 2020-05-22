@@ -11,6 +11,11 @@ TagManager:
   - Slot
   - Backpack
   - Canvas
+  - NormalNote
+  - Buddhist
+  - ThroneItems
+  - Throne
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -20,8 +25,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Line
+  - Background
   - 
   - 
   - 
@@ -47,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3939980509
     locked: 0

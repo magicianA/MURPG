@@ -7,7 +7,7 @@ public class Buliding : MonoBehaviour
     public TextAsset text;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(true)
+        if(MyInput.isButtonDown)
             UIManager.Dialogue(text);
     }
 }

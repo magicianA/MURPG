@@ -28,9 +28,21 @@ public class Bell : MonoBehaviour
     bool lowFinish = false;
     bool midFinish = false;
     bool highFinish = false;
+
+    InteractiveItem yang;
+    Backpack backpack;
+
+    public GameObject tilt;
+
+    public AudioClip[] clips;
+    private void Start()
+    {
+        backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
+        yang = new InteractiveItem("Daily/道具/洋", "洋");
+    }
     private void Update()
     {
-        if (MyInput.isButtonDown == true /*&& inRegion*/)
+        if (MyInput.isButtonDown == true && inRegion)
         {
             PlaySound();
             float interval = Time.time - originTime;
@@ -62,7 +74,12 @@ public class Bell : MonoBehaviour
 
 
         }
-
+        if (lowFinish && midFinish && highFinish)
+        {
+            tilt.SetActive(true);
+            backpack.AddItem(yang);
+            gameObject.SetActive(false);
+        }
     }
     private void Check()
     {
@@ -106,7 +123,9 @@ public class Bell : MonoBehaviour
     }
     private void PlaySound()
     {
-
+        int index = Random.Range(0, 6);
+        gameObject.GetComponent<AudioSource>().clip = clips[index];
+        gameObject.GetComponent<AudioSource>().Play();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

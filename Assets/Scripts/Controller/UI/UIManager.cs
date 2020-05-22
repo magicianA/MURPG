@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public static GameObject canvas;
     public static GameObject dialoguePrefab;
     public static GameObject tipPrefab;
+    public static bool isFinish = true;
     private void Awake()
     {
         canvas = GameObject.FindWithTag("Canvas");
@@ -16,6 +17,9 @@ public class UIManager : MonoBehaviour
     }
     public static void Dialogue(TextAsset file)
     {
+        if (!isFinish)
+            return;
+        isFinish = false;
         GameObject panel = Instantiate(dialoguePrefab);
         panel.transform.SetParent(canvas.transform);
         panel.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -29,6 +33,8 @@ public class UIManager : MonoBehaviour
     }
     public static void TextTip(string tip)
     {
+        if (!isFinish)
+            return;
         GameObject panel = Instantiate(tipPrefab);
         panel.transform.SetParent(canvas.transform);
         panel.transform.localScale = new Vector3(1, 1, 1);
