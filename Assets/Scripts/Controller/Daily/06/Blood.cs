@@ -17,7 +17,7 @@ public class Blood : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (MyInput.isButtonDown) 
+        if (MyInput.isButtonDown&&!backpack.ContainsItem("拉")) 
         {
             UIManager.Dialogue(text);
             backpack.AddItem(la);

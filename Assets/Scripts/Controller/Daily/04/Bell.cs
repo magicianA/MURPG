@@ -35,6 +35,10 @@ public class Bell : MonoBehaviour
     public GameObject tilt;
 
     public AudioClip[] clips;
+
+    public GameObject purple;
+    public GameObject yellow;
+    public GameObject green;
     private void Start()
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
@@ -88,6 +92,7 @@ public class Bell : MonoBehaviour
     private void LowSpeed()
     {
         Debug.Log("低速");
+        green.GetComponent<Bling>().enabled = true;
         midCount = 0;
         highCount = 0;
         lowCount++;
@@ -95,11 +100,14 @@ public class Bell : MonoBehaviour
         {
             Debug.Log("低速完成");
             lowFinish = true;
+            green.GetComponent<Bling>().finish = true;
+
         }
     }
     private void MidSpeed()
     {
         Debug.Log("中速");
+        yellow.GetComponent<Bling>().enabled = true;
         lowCount = 0;
         highCount = 0;
         midCount++;
@@ -107,10 +115,13 @@ public class Bell : MonoBehaviour
         {
             Debug.Log("中速完成");
             midFinish = true;
+            yellow.GetComponent<Bling>().finish = true;
+
         }
     }
     private void HighSpeed()
     {
+        purple.GetComponent<Bling>().enabled = true;
         Debug.Log("高速");
         midCount = 0;
         lowCount = 0;
@@ -119,6 +130,7 @@ public class Bell : MonoBehaviour
         {
             Debug.Log("高速完成");
             highFinish = true;
+            purple.GetComponent<Bling>().finish = true;
         }
     }
     private void PlaySound()

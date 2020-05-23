@@ -15,7 +15,7 @@ public class DailyPlayer : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.LoadScene("01");
+        SceneManager.LoadScene("04");
         throne = GameObject.FindWithTag("Throne");
         throne.SetActive(false);
         buddhist = GameObject.FindWithTag("Buddhist");
@@ -35,7 +35,6 @@ public class DailyPlayer : MonoBehaviour
             anim.SetBool("goright", false);
             anim.SetBool("static01", false);
             anim.SetBool("static02", true);
-            Debug.Log(0);
         }
         if (movable)
         {

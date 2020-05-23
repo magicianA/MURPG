@@ -15,8 +15,7 @@ public class Turntable : MonoBehaviour
     public GameObject yue;
     public GameObject huo;
     private Vector3[] outerPos=new Vector3[3];
-
-    InteractiveItem wa;
+    public GameObject wa;
     Backpack backpack;
     private void Update()
     {
@@ -56,7 +55,6 @@ public class Turntable : MonoBehaviour
             outerPos[i] = outerObj[i].transform.position;
         }
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
-        wa = new InteractiveItem("Daily/道具/哇", "哇");
     }
     private void Exchange()
     {
@@ -78,6 +76,7 @@ public class Turntable : MonoBehaviour
         }
         innerObj = newInner;
         outerObj = newOuter;
+        CheckWin();
     }
     private int GetNearIndex(GameObject Obj,List<GameObject> list)
     {
@@ -98,7 +97,6 @@ public class Turntable : MonoBehaviour
         Vector3 vector = g1.transform.position;
         g1.transform.position = g2.transform.position;
         g2.transform.position = vector;
-        CheckWin();
     }
     private float GetFlatDis(Vector3 v1, Vector3 v2)
     {
@@ -119,9 +117,9 @@ public class Turntable : MonoBehaviour
         if (GetFlatDis(ri.transform.position, outerPos[0]) < 0.01f &&
             GetFlatDis(yue.transform.position, outerPos[2]) < 0.01f &&
             GetFlatDis(huo.transform.position, outerPos[1]) < 0.01f &&
-            backpack.ContainsItem("哇"))
+            !backpack.ContainsItem("哇"))
         {
-            backpack.AddItem(wa);
+            wa.SetActive(true);
             DailyPlayer.camera.GetComponent<Camera>().orthographicSize = 5f;
             DailyPlayer.camera.GetComponent<SmartCamera>().enabled = true;
         }

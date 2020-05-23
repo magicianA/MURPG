@@ -99,7 +99,7 @@ public class Backpack : MonoBehaviour
     }
     public bool ContainsItem(string name)
     {
-        if (itemsGameObjects.ContainsKey(name))
+        if (itemsGameObjects.ContainsKey(name)||ThroneData.throneItemList.Contains(name))
             return true;
         else
             return false;

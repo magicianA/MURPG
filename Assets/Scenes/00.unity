@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -627,6 +627,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1288779668}
     m_Modifications:
+    - target: {fileID: 5726041277210386553, guid: 31da04e952042584abaec5e9582315f6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 72.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5726041278376870022, guid: 31da04e952042584abaec5e9582315f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -985,7 +990,7 @@ Camera:
   m_GameObject: {fileID: 1243422645}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}

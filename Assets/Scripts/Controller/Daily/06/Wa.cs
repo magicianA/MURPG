@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ha : MonoBehaviour
+public class Wa : MonoBehaviour
 {
-    InteractiveItem ha;
+    InteractiveItem wa;
     Backpack backpack;
+
     public GameObject next;
-    private void Start()
+    void Start()
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
-        ha = new InteractiveItem("Daily/道具/哈", "哈");
-
+        wa = new InteractiveItem("Daily/道具/哇", "哇");
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (MyInput.isButtonDown)
+        if(MyInput.isButtonDown)
         {
-            backpack.AddItem(ha);
+            backpack.AddItem(wa);
             next.SetActive(true);
             Destroy(gameObject);
         }
