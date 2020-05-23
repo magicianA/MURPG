@@ -43,6 +43,9 @@ public class Bell : MonoBehaviour
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
         yang = new InteractiveItem("Daily/道具/洋", "洋");
+        lowCount = 0;
+        midCount = 0;
+        highCount = 0;
     }
     private void Update()
     {
@@ -69,9 +72,6 @@ public class Bell : MonoBehaviour
             }
             else
             {
-                lowCount = 0;
-                midCount = 0;
-                highCount = 0;
             }
 
             Debug.Log("lowcount " + lowCount + ";   midcount" + midCount + ";   highcount" + highCount);
@@ -93,8 +93,6 @@ public class Bell : MonoBehaviour
     {
         Debug.Log("低速");
         green.GetComponent<Bling>().enabled = true;
-        midCount = 0;
-        highCount = 0;
         lowCount++;
         if (lowCount >= 18)
         {
@@ -108,8 +106,6 @@ public class Bell : MonoBehaviour
     {
         Debug.Log("中速");
         yellow.GetComponent<Bling>().enabled = true;
-        lowCount = 0;
-        highCount = 0;
         midCount++;
         if (midCount >= 18)
         {
@@ -123,8 +119,6 @@ public class Bell : MonoBehaviour
     {
         purple.GetComponent<Bling>().enabled = true;
         Debug.Log("高速");
-        midCount = 0;
-        lowCount = 0;
         highCount++;
         if (highCount >= 18)
         {

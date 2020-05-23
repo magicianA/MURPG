@@ -7,7 +7,11 @@ public class Hanging : MonoBehaviour
     public TextAsset text;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (MyInput.isButtonDown)
+        if (MyInput.isButtonDown&&UIManager.isFinish)
+        {
             UIManager.Dialogue(text);
+            gameObject.GetComponent<AudioSource>().Play();
+        }
+
     }
 }

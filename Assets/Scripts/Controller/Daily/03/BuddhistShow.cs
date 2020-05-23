@@ -60,6 +60,7 @@ public class BuddhistShow : MonoBehaviour
             {
                 InteractiveItem item = new InteractiveItem("Daily/道具/恰", "恰");
                 backpack.AddItem(item);
+                DailyPlayer.isBuddhist = true;
             }
         }
     }

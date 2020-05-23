@@ -8,7 +8,13 @@ public class LoadScene : MonoBehaviour
     public string sceneName;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(0);
+        if (SceneManager.GetActiveScene().name == "15")
+        {
+            Destroy(GameObject.FindWithTag("Player"));
+            Destroy(GameObject.FindWithTag("Canvas"));
+            Destroy(GameObject.FindWithTag("MainCamera"));
+            Destroy(GameObject.Find("EventSystem"));
+        }
         SceneManager.LoadScene(sceneName);
     }
 }

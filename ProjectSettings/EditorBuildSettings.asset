@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/06.unity
     guid: 25ab38dbdf5bc4446aef7103e145c8c0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Resources/Music/GameScene.unity
     guid: a05983dcb7962534791eeef0b787ebce
   - enabled: 1
@@ -47,4 +47,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/12.unity
     guid: 11c9d8805c7b96443a7976f121e15406
+  - enabled: 1
+    path: Assets/Scenes/13.unity
+    guid: 61692e9325751ee46ae625dc344719e3
+  - enabled: 1
+    path: Assets/Scenes/14.unity
+    guid: 5f22f73e8280e544e8e43ee410358d91
+  - enabled: 1
+    path: Assets/Scenes/15.unity
+    guid: 840b5ebd0101c1b4297d3d16dd25ebce
   m_configObjects: {}

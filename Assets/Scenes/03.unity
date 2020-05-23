@@ -165,7 +165,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 48c70adbfdae41d4e8e2a0cb00f421f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -245,7 +245,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 40253130d8309944c9207e5a34afb434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -508,7 +508,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 62494d646e16820459a82d955900b3a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2041,6 +2041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4900000, guid: f53a4683aed401941ac316a701e6b984, type: 3}
+  next: {fileID: 0}
 --- !u!58 &1464210525
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3086,7 +3087,7 @@ PrefabInstance:
     - target: {fileID: 6860928688375068353, guid: b0471662054b86449b0f250f008b0af8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.2
+      value: -8.86
       objectReference: {fileID: 0}
     - target: {fileID: 6860928688375068353, guid: b0471662054b86449b0f250f008b0af8,
         type: 3}
@@ -3724,6 +3725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857360096155362740, guid: 9592d0eaada394647beb48a90bb294bc,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 2857360096155362741, guid: 9592d0eaada394647beb48a90bb294bc,
         type: 3}

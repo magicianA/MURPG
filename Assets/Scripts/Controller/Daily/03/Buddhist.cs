@@ -8,6 +8,7 @@ public class Buddhist : MonoBehaviour
 
     InteractiveItem a;
     Backpack backpack;
+    public GameObject next;
     private void Start()
     {
         backpack = GameObject.FindWithTag("Backpack").GetComponent<Backpack>();
@@ -24,5 +25,10 @@ public class Buddhist : MonoBehaviour
                 backpack.AddItem(a);
             }
         }
+    }
+    private void Update()
+    {
+        if (DailyPlayer.isBuddhist)
+            next.SetActive(true);
     }
 }

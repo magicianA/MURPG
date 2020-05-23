@@ -12,10 +12,10 @@ public class DailyPlayer : MonoBehaviour
     public static GameObject camera;
     public float speed = 5f;
     private Animator anim;
-
+    public static bool isBuddhist = false;
     private void Start()
     {
-        SceneManager.LoadScene("04");
+        SceneManager.LoadScene("01");
         throne = GameObject.FindWithTag("Throne");
         throne.SetActive(false);
         buddhist = GameObject.FindWithTag("Buddhist");
