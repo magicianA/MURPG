@@ -34,7 +34,7 @@ public class line : MonoBehaviour
     private KeyCode curkey;
 
     public GameObject noteeffectcontroller;
-
+    private Animator animator;
 
     void Awake(){
         _instance = this;
@@ -44,6 +44,7 @@ public class line : MonoBehaviour
         Input.multiTouchEnabled = true;
         Input.simulateMouseWithTouches = true;
         fingerActionSensitivity = Screen.width * 0.05f;
+        animator = player.GetComponentInChildren<Animator>();
     }
     void Update()
     {   
@@ -71,7 +72,7 @@ public class line : MonoBehaviour
                             Debug.Log(res);
                             if(res != NoteResultType.Unknown){
                                 Destroy(hit.collider.gameObject);    
-                                noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
+                                noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position,getColor(res));
                             }
                         }
                         if(hit.transform.tag == "FlickNote"){
@@ -145,6 +146,7 @@ public class line : MonoBehaviour
                         else if(fingerSegmentY == 0) {
                             if(fingerSegmentX > 0){
                                 Debug.Log ("right");
+                                animator.SetBool("onMoveRight",true);
                                 if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 1){
                                     Destroy(curnote);
                                     noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
@@ -152,6 +154,7 @@ public class line : MonoBehaviour
                             }
                             else{
                                 Debug.Log("left");
+                                animator.SetBool("onMoveLeft",true);
                                 if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 3){
                                     Destroy(curnote);
                                     noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
@@ -163,7 +166,9 @@ public class line : MonoBehaviour
             }
             if(Input.GetMouseButtonUp(0)){
                 fingerTouchState = FINGER_STATE_NULL;
-                onplayermove = false;            
+                onplayermove = false; 
+                animator.SetBool("onMoveRight",false);
+                animator.SetBool("onMoveLeft",false);           
             }
             if(Input.GetKeyDown(KeyCode.Space)){
                 ray = new Ray(player.transform.position,Vector3.forward);
@@ -171,14 +176,18 @@ public class line : MonoBehaviour
                     hitpoint = hit.point;
                     obj = hit.collider.gameObject;
                     if(hit.transform.tag == "ClickNote"){
+                        animator.SetBool("onBlockNormal",true);
                         NoteResultType res  = CheckClickResult(hitpoint.z);
                         Debug.Log(res);
                         if(res != NoteResultType.Unknown){
                             Destroy(hit.collider.gameObject);    
-                            noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
+                            GUIhp.UpdateHP(-0.1f);
+                            noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position,getColor(res));
                         }
                     }
                 }
+            }else{
+                animator.SetBool("onBlockNormal",false);
             }
             if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)){
                 if(Input.GetKeyDown(KeyCode.W)) curkey = KeyCode.W;
@@ -190,6 +199,7 @@ public class line : MonoBehaviour
                     hitpoint = hit.point;
                     obj = hit.collider.gameObject;
                     if(hit.transform.tag == "FlickNote"){
+                        animator.SetBool("onBlockUp",true);
                         flickres = CheckClickResult(hitpoint.z);
                         if(flickres != NoteResultType.Unknown){
                             curnote = obj;
@@ -224,6 +234,8 @@ public class line : MonoBehaviour
                         }
                     }
                 }
+            }else{
+                animator.SetBool("onBlockUp",false);
             }
         }
     }
@@ -236,6 +248,18 @@ public class line : MonoBehaviour
         if(d < 0.25f)
             return NoteResultType.Bad;
         return NoteResultType.Unknown;
+    }
+    private int getColor(NoteResultType x){
+        switch(x){
+            case NoteResultType.Perfect:
+                return 0;
+            case NoteResultType.Good:
+                return 1;
+            case NoteResultType.Bad:
+                return 2;
+            default:
+                return -1;
+        }
     }
     public static void CheckEnergy(float d){
         float dis = Mathf.Abs(d - _instance.player.transform.position.x);
