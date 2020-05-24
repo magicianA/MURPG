@@ -15,7 +15,6 @@ public class DailyPlayer : MonoBehaviour
     public static bool isBuddhist = false;
     private void Start()
     {
-        SceneManager.LoadScene("01");
         throne = GameObject.FindWithTag("Throne");
         throne.SetActive(false);
         buddhist = GameObject.FindWithTag("Buddhist");
