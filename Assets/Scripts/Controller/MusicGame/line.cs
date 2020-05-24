@@ -181,7 +181,7 @@ public class line : MonoBehaviour
                         Debug.Log(res);
                         if(res != NoteResultType.Unknown){
                             Destroy(hit.collider.gameObject);    
-                            GUIhp.UpdateHP(-0.1f);
+                            GUIhp.UpdateHP(-0.002f);
                             noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position,getColor(res));
                         }
                     }
@@ -207,13 +207,15 @@ public class line : MonoBehaviour
                         Debug.Log(flickres);
                         switch(curkey){
                             case KeyCode.D:
-                                if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 1){
+                                if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 1){    
+                                    GUIhp.UpdateHP(-0.003f);
                                     Destroy(curnote);
                                     noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
                                 }
                                 break;
                             case KeyCode.W:
                                 if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 2){
+                                    GUIhp.UpdateHP(-0.003f);
                                     Destroy(curnote);
                                     noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
                                 }
@@ -221,12 +223,14 @@ public class line : MonoBehaviour
                             
                             case KeyCode.A:
                                 if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 3){
+                                    GUIhp.UpdateHP(-0.003f);
                                     Destroy(curnote);
                                     noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
                                 }
                                 break;
                             case KeyCode.S:
                                 if(curnote && curnote.GetComponent<FlickNoteAct>().flickdir == 4){
+                                    GUIhp.UpdateHP(-0.0031f);
                                     Destroy(curnote);
                                     noteeffectcontroller.GetComponent<NoteEffectCotroller>().instance.effect(obj.transform.position);
                                 }
