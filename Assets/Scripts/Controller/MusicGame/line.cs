@@ -44,7 +44,7 @@ public class line : MonoBehaviour
         Input.multiTouchEnabled = true;
         Input.simulateMouseWithTouches = true;
         fingerActionSensitivity = Screen.width * 0.05f;
-        animator = player.GetComponentInChildren<Animator>();
+        animator = player.GetComponent<Animator>();
     }
     void Update()
     {   
@@ -57,7 +57,7 @@ public class line : MonoBehaviour
                     if(obj.name == "Line"){
                         if(Mathf.Abs(player.transform.position.x - hitpoint.x) < 3){
                             onplayermove = true;
-                            player.transform.position = new Vector3(hitpoint.x,player.transform.position.y,player.transform.position.z);
+                            player.transform.position = new Vector3(hitpoint.x + 0.50f,player.transform.position.y,player.transform.position.z);
                         }
                     }
                 }
@@ -98,7 +98,7 @@ public class line : MonoBehaviour
                         hitpoint = hit.point;
                         if(obj.name == "Line"){
                             if(Mathf.Abs(player.transform.position.x - hitpoint.x) < 10){
-                                player.transform.position = new Vector3(hitpoint.x,player.transform.position.y,player.transform.position.z);
+                                player.transform.position = new Vector3(hitpoint.x + 0.50f,player.transform.position.y,player.transform.position.z);
                             }
                             else{
                                 onplayermove = false;
@@ -171,7 +171,7 @@ public class line : MonoBehaviour
                 animator.SetBool("onMoveLeft",false);           
             }
             if(Input.GetKeyDown(KeyCode.Space)){
-                ray = new Ray(player.transform.position,Vector3.forward);
+                ray = new Ray(player.transform.position - new Vector3(0.50f,0,0),Vector3.forward);
                 if(Physics.Raycast(ray,out hit)){
                     hitpoint = hit.point;
                     obj = hit.collider.gameObject;
@@ -194,7 +194,7 @@ public class line : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.A)) curkey = KeyCode.A;
                 if(Input.GetKeyDown(KeyCode.S)) curkey = KeyCode.S;
                 if(Input.GetKeyDown(KeyCode.D)) curkey = KeyCode.D;
-                ray = new Ray(player.transform.position,Vector3.forward);
+                ray = new Ray(player.transform.position - new Vector3(0.50f,0,0),Vector3.forward);
                 if(Physics.Raycast(ray,out hit)){
                     hitpoint = hit.point;
                     obj = hit.collider.gameObject;
