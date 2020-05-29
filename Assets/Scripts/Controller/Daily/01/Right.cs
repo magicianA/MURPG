@@ -24,6 +24,7 @@ public class Right : MonoBehaviour
             if(MyInput.isButtonDown)
             {
                 count++;
+                Debug.Log(count);
             }
             if (count == 4)
             {

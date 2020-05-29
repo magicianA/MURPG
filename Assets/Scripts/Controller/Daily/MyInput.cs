@@ -5,11 +5,18 @@ using UnityEngine;
 public class MyInput : MonoBehaviour
 {
     public static bool isButtonDown;
+    public static bool w;
+    public static bool a;
+    public static bool s;
+    public static bool d;
     private void Update()
     {
         isButtonDown = false;
-        if (Input.GetKeyDown(KeyCode.F))
+        if(DirBtn.f)
+        {
             isButtonDown = true;
+            DirBtn.f = false;
+        }
     }
-    
+   
 }

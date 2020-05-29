@@ -24,7 +24,7 @@ public class DailyPlayer : MonoBehaviour
         camera = GameObject.FindWithTag("MainCamera");
         anim = gameObject.GetComponent<Animator>();
     }
-    private void Update()
+    private void LateUpdate()
     {
         AnimatorStateInfo animatorInfo;
         animatorInfo = anim.GetCurrentAnimatorStateInfo(0);
@@ -37,13 +37,13 @@ public class DailyPlayer : MonoBehaviour
         }
         if (movable)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (MyInput.w)
                 Move(Vector2.up);
-            else if (Input.GetKey(KeyCode.A))
+            else if (MyInput.a)
                 Move(Vector2.left);
-            else if (Input.GetKey(KeyCode.S))
+            else if (MyInput.s)
                 Move(Vector2.down);
-            else if (Input.GetKey(KeyCode.D))
+            else if (MyInput.d)
                 Move(Vector2.right);
             else
                 Move(new Vector2(0, 0.0001f));
